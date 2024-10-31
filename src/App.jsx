@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaSearch } from "react-icons/fa";
+import { useRef, useState } from "react";
 import "./App.css";
-import { useEffect, useRef, useState } from "react";
+import Animals from "./components/Animals/Animals";
 
 const options = {
   method: "GET",
@@ -10,10 +11,10 @@ const options = {
 
 const App = () => {
   const searchQuery = useRef();
-  const [enteredSearchQuery, setEnteredSearchQuery] = useState('');
+  const [enteredSearchQuery, setEnteredSearchQuery] = useState("");
 
   const fetchData = async () => {
-    if(enteredSearchQuery.length>0){
+    if (enteredSearchQuery.length > 0) {
       const response = await fetch(
         `https://api.api-ninjas.com/v1/animals?name=${enteredSearchQuery}`,
         options
@@ -22,7 +23,7 @@ const App = () => {
         throw new Error("Network response was not ok");
       }
       return response.json();
-    }else{
+    } else {
       return [];
     }
   };
@@ -45,7 +46,7 @@ const App = () => {
 
   return (
     <>
-      <div className="w-full max-w-sm min-w-[200px]">
+      <div className="w-full min-w-[200px] flex justify-center mb-8">
         <div className="relative">
           <input
             ref={searchQuery}
@@ -63,13 +64,7 @@ const App = () => {
         </div>
       </div>
       <div>
-        {data.map((item, index) => (
-          <div key={index}>
-            <h1>{item.name}</h1>
-            <h2>{item.locations[0]}</h2>
-            <p>{item.characteristics.most_distinctive_feature}</p>
-          </div>
-        ))}
+        <Animals animals={data} />
       </div>
     </>
   );
