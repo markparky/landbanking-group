@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.16",
@@ -19,7 +20,11 @@
     "tailwindcss": "^3.4.14"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
     "@eslint/js": "^9.13.0",
+    "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.14",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
@@ -28,6 +33,11 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "vite": "^5.4.10"
+  },
+  "jest": {
+    
   }
 }
