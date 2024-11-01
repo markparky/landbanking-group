@@ -40,7 +40,7 @@ export default function Search() {
   
   useEffect(() => {
     if(data){
-      // setSearchAnimals(data);
+      setSearchAnimals(data);
     }
 
   }, [data]);
