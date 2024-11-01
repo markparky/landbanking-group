@@ -245,8 +245,27 @@ export default function AnimalsContextProvider({ children }) {
     },
   ]);
 
-  function handleSelectAnimal(favAnimal) {
-    console.log("favAnimal", favAnimal);
+  function removeAnimal(animalName, updateFunction) {
+    updateFunction(
+      (prevAnimals) =>
+        prevAnimals.filter((animal) => animal.name !== animalName)
+      // const index = rtnAnimals.findIndex(
+      //   (animal) => animal.name === animalName
+      // );
+      // rtnAnimals.splice(index, 1);
+    );
+
+    /**
+     * 
+     *  updateFunction((prevAnimals) => {
+      console.log('prev', prevAnimals);
+      console.log('name', animalName);
+      prevAnimals.filter((animal) => animal.name === animalName);
+    });
+     */
+  }
+
+  function addToFavorites(favAnimal) {
     setFavorites((prevPickedAnimals) => {
       if (prevPickedAnimals.some((animal) => animal.name === favAnimal.name)) {
         return prevPickedAnimals;
@@ -254,11 +273,22 @@ export default function AnimalsContextProvider({ children }) {
       const animal = {
         ...searchAnimals.find((animal) => animal.name === favAnimal.name),
         isFavorite: true,
+        rating: 0,
       };
+      removeAnimal(animal.name, setSearchAnimals);
 
-      const temp = [animal, ...prevPickedAnimals];
-      return temp;
+      return [animal, ...prevPickedAnimals];
     });
+  }
+
+  function removeFromFavorites(favAnimal) {
+    setFavorites((prevPickedAnimals) =>
+      prevPickedAnimals.filter((animal) => animal.name !== favAnimal.name)
+    );
+  }
+
+  function handleSelectAnimal(animal) {
+    animal.isFavorite ? removeFromFavorites(animal) : addToFavorites(animal);
   }
 
   const animalCtx = {
