@@ -11,9 +11,9 @@
 
 A mostly complete mini-project :)
 
-Time developing: 3.5 hours (tests took longer than wanted/expected)
-Planning: 1.5 hours
-Studying: 5 hours <-- I havn't used react in 3 years so forgive me if my code is more academic than production-ready.
+- Time developing: 3.5 hours (tests took longer than wanted/expected)
+- Planning: 1.5 hours
+- Studying: 5 hours <-- I havn't used react in 3 years so forgive me if my code is more academic than production-ready.
 
 ### 🤖 Tech used
 - React
