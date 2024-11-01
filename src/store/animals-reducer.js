@@ -1,3 +1,5 @@
+import { storageKey } from "./animals-context";
+
 export const Action = {
   AddFavorite: "ADD_FAVORTIE",
   RemoveFavorite: "REMOVE_FAVORTIE",
@@ -21,6 +23,8 @@ export function animalsReducer(state, action) {
         });
       }
 
+      localStorage.setItem(storageKey, JSON.stringify(updatedFavorites));
+
       return {
         ...state,
         animals: updatedAnimals.filter(
@@ -33,11 +37,15 @@ export function animalsReducer(state, action) {
       return { ...state, animals: action.payload };
     }
     case Action.RemoveFavorite: {
+      const updatedFavorites = [...state.favorites].filter(
+        (animal) => animal.name !== action.payload.name
+      );
+
+      localStorage.setItem(storageKey, JSON.stringify(updatedFavorites));
+
       return {
         ...state,
-        favorites: [...state.favorites].filter(
-          (animal) => animal.name !== action.payload.name
-        ),
+        favorites: updatedFavorites,
       };
     }
     case Action.UpdateFavorite: {

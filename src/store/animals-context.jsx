@@ -1,5 +1,8 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import { Action, animalsReducer } from "./animals-reducer";
+
+export const storageKey = "favoriteAnimals";
+const storedFavorites = JSON.parse(localStorage.getItem(storageKey)) || [];
 
 export const AnimalsContext = createContext({
   animals: [],
@@ -12,7 +15,7 @@ export const AnimalsContext = createContext({
 export default function AnimalsContextProvider({ children }) {
   const [animalsState, animalsDispatch] = useReducer(animalsReducer, {
     animals: [],
-    favorites: [],
+    favorites: [...storedFavorites],
   });
 
   function addToFavorites(favAnimal) {
