@@ -6,17 +6,15 @@ export const AnimalsContext = createContext({
   favorites: [],
   setSearchAnimals: () => {},
   selectAnimal: () => {},
+  updateAnimal: () => {},
 });
 
 export default function AnimalsContextProvider({ children }) {
-  const [animalsState, animalsDispatch] = useReducer(
-    animalsReducer,
-    {
-      animals: [],
-      favorites:[]
-    }
-  );
-  
+  const [animalsState, animalsDispatch] = useReducer(animalsReducer, {
+    animals: [],
+    favorites: [],
+  });
+
   function addToFavorites(favAnimal) {
     animalsDispatch({
       type: Action.AddFavorite,
@@ -35,10 +33,17 @@ export default function AnimalsContextProvider({ children }) {
     animal.isFavorite ? removeFromFavorites(animal) : addToFavorites(animal);
   }
 
-  function setSearchAnimals(animals){
+  function setSearchAnimals(animals) {
     animalsDispatch({
       type: Action.UpdateAnimals,
       payload: animals,
+    });
+  }
+
+  function updateFavorite(animalName, amount) {
+    animalsDispatch({
+      type: Action.UpdateFavorite,
+      payload: { id: animalName, amount },
     });
   }
 
@@ -47,6 +52,7 @@ export default function AnimalsContextProvider({ children }) {
     favorites: animalsState.favorites,
     setSearchAnimals: setSearchAnimals,
     selectAnimal: handleSelectAnimal,
+    updateFavorite: updateFavorite,
   };
 
   return (

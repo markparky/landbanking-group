@@ -40,6 +40,20 @@ export function animalsReducer(state, action) {
         ),
       };
     }
+    case Action.UpdateFavorite: {
+      const updatedFavorites = [...state.favorites];
+
+      const updatedFavoritesIndex = updatedFavorites.findIndex(
+        (animal) => animal.name === action.payload.id
+      );
+
+      updatedFavorites[updatedFavoritesIndex].rating += action.payload.amount;
+
+      return {
+        ...state,
+        favorites: updatedFavorites,
+      };
+    }
 
     default: {
       throw Error(`Unknown Action ${action.type}`);
