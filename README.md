@@ -45,6 +45,7 @@ Lastly, I ran out of time to implement the attributes, but the system's core fun
 - Add enter on search
 - Responsive
 - move to separate pages
+-  theres a functioning debounce hook that should of been connected to the search input, but ran out of time. I do have a working version of this in another file
 
 ### 🐛 Known Bugs
 - Rating fires twice (Look at render cycles in general)
